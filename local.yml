@@ -1,0 +1,25 @@
+version: '3.0'
+
+services:
+  server:
+    image: grpc-server
+    build:
+      context: .
+      dockerfile: server-docker
+    command: python main.py
+    restart: always
+    ports:
+      - 4001:4001
+  webapp:
+    image: webapp-flask
+    build:
+      context: .
+      dockerfile: client-docker
+    command: python app.py
+    restart: always
+    ports:
+      - 3000:3000
+    links:
+      - server
+    depends_on:
+      - server

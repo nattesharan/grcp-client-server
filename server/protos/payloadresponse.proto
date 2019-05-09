@@ -1,0 +1,22 @@
+// This is proto file it basically describes the structure of the Service and the the values
+// which pass too and froo from a service.
+syntax = "proto3";
+
+service ImageSimilarityService {
+    rpc image_similarity (Payload) returns (Response) {};
+}
+
+message Payload {
+    string image_url1 = 1;// the 1 here is a tag avoid duplicate tags
+    string image_url2 = 2;
+}
+
+message Response {
+    float image_similarity_score = 1;
+    string image_url1 = 2;
+    string image_url2 = 3;
+}
+
+// compile the protos with 
+// python -m grpc_tools.protoc -I./protos --python_out=. --grpc_python_out=. ./protos/payloadresponse.proto
+// if we make any change to the proto we need to compile it again and generate new proto buffer files.

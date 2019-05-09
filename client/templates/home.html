@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Home</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form method = "POST" action="" enctype = "multipart/form-data">
+            <input type = "file" id="image" name="image[]" multiple accept="image/jpg, image/jpeg" />
+            <input type = "submit"/>
+        </form>
+        {% if data and data['status'] %}
+            <div class="test">
+                <img src={{ data["img_1"] }} height="100" width="100">
+                <hr>
+                <img src={{ data["img_2"] }} height="100" width="100">
+                <hr>
+            </div>
+            <h3>Similarity Score Out of 100- {{ data['score'] * 100 }}</h3>
+        {% endif %}
+    </body>
+    <script type="text/javascript">
+        $("#image").on("change", function() {
+            if ($("#image")[0].files.length > 2) {
+                alert("You can select only 2 images");
+            } else {
+                $("#imageUploadForm").submit();
+            }
+        });
+    </script>
+<html>

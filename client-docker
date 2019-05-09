@@ -1,0 +1,10 @@
+FROM python:3.6
+
+ADD /client /client
+
+WORKDIR /client
+RUN pip install -r requirements.txt
+RUN pip install gunicorn
+ENV CLOUDINARY_URL=cloudinary://663314969728525:yENrtmlHycsoRVV9PC_1jl5sDZw@sharan
+ENV USING_DOCKER=1
+EXPOSE 3000
